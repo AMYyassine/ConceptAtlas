@@ -109,6 +109,10 @@ async def explain(request: ExplainRequest):
         raise HTTPException(status_code=502, detail='The AI provider could not return an explanation. Check the server-side configuration.') from None
     return ExplainResponse(request_id=request.request_id, explanation=answer)
 
+from .learning_api import attach_routes
+import sys
+attach_routes(app, sys.modules[__name__])
+
 @app.get('/api/{unknown_path:path}', include_in_schema=False)
 async def unknown_api(unknown_path: str):
     return JSONResponse({'detail':'Unknown API route.'}, status_code=404)

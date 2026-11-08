@@ -33,7 +33,7 @@ def main():
         except OSError:raise SystemExit(f'Port {args.port} is already in use. Close the existing server, or run: python launch.py --port {args.port+1}')
     if args.demo:
         command=[sys.executable,'-m','http.server',str(args.port),'--bind','127.0.0.1','--directory',str(ROOT/'dist')]
-        print('Starting the self-contained demo. The built-in guide is active.',flush=True)
+        print('Starting the self-contained demo. The prepared example is available; AI generation is disabled in demo mode.',flush=True)
     else:
         python=ROOT/'.venv'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
         if not python.exists():

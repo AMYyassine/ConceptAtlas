@@ -1,39 +1,43 @@
-# ConceptAtlas: a three-minute research demonstration
+# Researcher-role demonstration — ConceptAtlas
 
-## 1. Introduce the extension — 25 seconds
+## 1. From one answer to a learning space — 45 seconds
 
-“Luminate inspired us to think about structured exploration. ConceptAtlas applies that idea to learning: instead of exploring alternative generated answers, students explore connected representations of one concept. Our first module is gradient descent.”
+“Luminate generates dimensions and uses them to organize multiple possible responses. ConceptAtlas keeps that interaction structure and applies it to education. The learner starts with a question rather than a preselected simulation.”
 
-Show the graph, equation, code, and table. Keep free exploration active.
+Type: **Help me understand gradient descent.**
 
-## 2. Connect one update — 45 seconds
+With a configured provider, submit the question. Point out the dimensions appearing before the explanations. Without a provider, explicitly say: **“I will use a prepared example to demonstrate the interaction.”** Open the prepared example; do not present it as live generation.
 
-Choose **Steady convergence**, then select **Next iteration** once.
+## 2. Explore dimensions — 60 seconds
 
-“The parameter starts at zero. The gradient is minus six. With a learning rate of 0.1, the new parameter is 0.6. Notice that the point, the substituted equation, the code values, the table, and the explanation all describe that same update.”
+“At the overview level, each point is an explanation. I can arrange them by different dimensions. In this prepared example, the horizontal dimension is Perspective, and the vertical one is Learning depth.”
 
-Point out the difference between the applied gradient, −6, and the gradient at the new point, −4.8. They are evaluated at different positions.
+Change an axis. Select one dimension value as a filter. Show that other explanations remain faintly visible for context. Clear the filter.
 
-## 3. Challenge a misconception — 45 seconds
+## 3. Zoom into understanding — 60 seconds
 
-Choose **Oscillating convergence**, then take two steps.
+“Zoom changes what I can read. I move from points to titles, keywords, summaries, and complete explanations. Clicking an explanation also opens it in the reading panel, so I can inspect one idea while retaining the larger space.”
 
-“Crossing the minimum does not necessarily mean the method is failing. Here the point crosses it, but its distance to the minimum decreases. The numerical and mathematical views explain what the graph shows.”
+Use the detail buttons, then **Fit all explanations**. Select a mathematical explanation and read its relationship to the visual one.
 
-Choose **Divergence**, then take one step.
+## 4. The educational extension — 90 seconds
 
-“With a larger rate, the objective rises. Students can compare the mechanisms rather than memorize one successful animation.”
+“For gradient descent, explanations share a controlled example. One iteration changes the graphical point, the substituted equation, the code values, and a short explanation across the space.”
 
-## 4. Offer guidance while preserving control — 40 seconds
+Take one iteration. Starting from w = 0 with rate 0.1, point out w = 0.6 and J(w) = 5.76. The applied gradient is −6; the new point's gradient is −4.8.
 
-Choose **Steady convergence**, then **Guided exploration**. Predict **Right**, advance once, and open **Ask the guide**.
+Compare rate 0.8 with 1.1 using the preset controls. Explain that crossing the minimum can mean oscillating convergence, not necessarily divergence. These behaviors and thresholds concern this particular quadratic.
 
-“If a student feels lost, they can request a simpler explanation and a suggested next action. They can switch back to free exploration whenever they want. This version uses a built-in guide by default; a configured LLM can add personalized explanations.”
+## 5. Support without taking away control — 45 seconds
 
-Close the guide and select **Return to free exploration**.
+“If a learner feels overwhelmed, guided exploration focuses one explanation and suggests another. The learner can return to free exploration at any time. With an AI connection, they can also ask about the selected explanation and current example.”
 
-## 5. State the research question — 25 seconds
+Activate **Guide my exploration**, then return to free exploration. Bookmark a useful explanation or add a note in your own words.
 
-“The question is whether synchronized interaction improves students' ability to connect representations. We would compare this prototype with the same content shown in independent views, using tasks that require learners to explain an unfamiliar update across graph, equation, and code. This demonstration shows the proposed interaction; it does not yet establish a learning benefit.”
+## 6. State the new research question — 60 seconds
 
-Keep content and explanation quality matched between conditions. Useful outcomes include cross-representation accuracy, quality of explanations, and perceived mental effort. Treat navigation traces as descriptive behavior rather than proof of understanding.
+“Our research question is whether a generated learning space, combined with linked interactions, helps students connect representations of a concept. We would compare synchronized representations with equivalent independent explanations, keeping content and guidance comparable.”
+
+“Tasks should require students to explain an unfamiliar update across graph, equation, and code. We would measure transfer accuracy and explanation quality, alongside perceived mental effort. A polished interface alone is not evidence that students learn more.”
+
+“Current boundaries: the explorer can generate text explanations for new topics, but the validated interactive module currently covers one gradient-descent objective. Extending the library of verified interactions is future engineering and research work.”

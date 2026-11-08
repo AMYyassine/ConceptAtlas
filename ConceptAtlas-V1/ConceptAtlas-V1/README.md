@@ -1,141 +1,154 @@
-# ConceptAtlas — Version 1
+# ConceptAtlas V1 — Educational exploration, inspired by Luminate
 
-**Explore one concept through connected representations.** This English-language research prototype links a graph, equations, illustrative Python code, a numerical history, and explanations of gradient descent. Every view follows the same computed iteration.
+This revised V1 starts with **a learning question**, generates **dimensions and explanations with an LLM**, and lets the learner explore them on a **zoomable canvas**. The visual layout follows Luminate's central interaction structure: a reading / writing panel on the left, a dimensional exploration space on the right, categorical axes and filters, and five semantic zoom levels.
 
-## Start the included app
+The earlier fixed simulator has become a connected educational example inside this exploration space. The interface and teaching content are in English.
 
-Extract the entire ZIP first. The built interface is included in `dist/`; Node.js is **not** required to run it.
+## Start with real AI generation
 
-### Windows: quickest demonstration
+1. Extract the entire ZIP into a folder.
+2. Install **Python 3.11 or newer** if needed. On Windows, `py` or `python` must be available.
+3. Double-click **START_CONCEPTATLAS.bat**. First launch installs the Python server dependencies in a local `.venv` and requires an internet connection.
+4. When the browser opens, click the **AI settings** gear in the upper-right corner.
+5. Enter your provider's API base URL, an actual model ID available to your account, and your API key. Click **Save AI connection**.
+6. Write a question such as **“Help me understand gradient descent.”** in the bottom-left input, then press the arrow.
 
-1. Install Python 3.11 or newer if it is not already installed. The installer must make `py` or `python` available.
-2. Double-click **START_DEMO.bat**.
-3. Your browser opens ConceptAtlas at `http://127.0.0.1:8000`.
-4. Keep the terminal open during the demo. Press Ctrl+C there to stop it.
+The app first requests topic-appropriate dimensions. Once these are returned, they appear immediately in the interface while the second request generates the explanations. Choose 6, 12, or 18 explanations; 6 is a useful starting point with a slower model or restrictive provider limits.
 
-This mode uses only Python's standard library. No package installation, API key, or network connection is needed once Python and this folder are available. The built-in guide is active; personalized AI is disabled.
+The **AI configured** status means settings have been supplied, not that the provider has accepted a request. The first generation verifies the credentials and model. Authentication, rate-limit, validation, and timeout errors are shown without substituting fake generated content.
 
-### Windows: server with optional AI
-
-Double-click **START_CONCEPTATLAS.bat**. On its first run, the launcher creates a project-local Python environment, installs the pinned server dependencies, and creates `backend/.env` from the example. Internet access is required for that first installation. The app still works without AI credentials.
-
-### macOS / Linux
+On macOS / Linux:
 
 ```bash
-python3 launch.py --demo
-# Or run the optional server:
 python3 launch.py
 ```
 
-If port 8000 is occupied, use `python launch.py --demo --port 8001` (replace `python` with `python3` when appropriate). Do not open `dist/index.html` by double-clicking it; use the launcher so the browser can load the app correctly.
+Keep the terminal open. Press Ctrl+C there to stop the server. If port 8000 is occupied, use `python launch.py --port 8001` (or `python3`). The prebuilt interface is included, so Node.js is not needed just to run the app.
 
-## What to try
+## Prepared example without an API key
 
-- **Next iteration:** update all representations together.
-- **Previous / history:** revisit any recorded step. Next replays existing recorded steps before extending the trajectory.
-- **Learning rate:** change the next update. If you are reviewing an earlier step, changing the rate discards its later steps and starts a new branch from that point.
-- **Starting parameter:** edit the number and press the restart icon or Enter to start a new experiment.
-- **Show slope:** reveal the tangent used at the start of the selected update. At step zero, it shows the current tangent.
-- **Graph points:** click a history point to revisit it. Panning is available; a new simulation action resets the view to the trajectory.
-- **Representation tabs:** emphasize a view while keeping the other views visible.
-- **Play / Pause:** run the updates automatically. The app stops near the minimum or at a display limit.
-- **Guided exploration:** predict the direction of the next update and receive feedback. Return to free exploration at any time.
-- **Ask the guide:** view a computed explanation and request a simple explanation of the rate, graph, or code. Without an API connection, responses come from a clearly labeled built-in guide.
-- **Export session / Import:** save and restore a validated JSON experiment. The app also saves the experiment in this browser's local storage when available.
-- **CSV:** export the numerical trajectory, including the rate used for each update.
+Double-click **START_DEMO.bat**, or run:
 
-Keyboard: Left/Right revisit or advance a step when focus is outside a control; Escape closes the guide or About dialog.
+```bash
+python3 launch.py --demo
+```
 
-## Three demonstration scenarios
+Click **Open the prepared gradient-descent example**. This opens 12 authored explanations across Perspective, Learning depth, and Learning focus. They demonstrate the canvas, zoom, filters, bookmarks, notes, guidance, and linked simulation.
 
-The objective is **J(w) = (w − 3)²**, with gradient **2(w − 3)** and update **w_next = w − η × gradient**. All presets start at w = 0.
+This mode needs only Python's standard library and the supplied files. It makes no AI requests. **Prepared example** is displayed explicitly. Asking about a new topic requires the full server and your own AI configuration; it does not silently return a canned answer.
 
-| Preset | Rate | First updated w | First objective | What to notice |
-| --- | --- | --- | --- | --- |
-| Steady convergence | 0.1 | 0.6 | 5.76 | A negative slope moves w right, toward the minimum. |
-| Oscillating convergence | 0.8 | 4.8 | 3.24 | Crossing the minimum can still reduce the objective. |
-| Divergence | 1.1 | 6.6 | 12.96 | An oversized update moves farther from the minimum. |
+Do not double-click `dist/index.html`; use a launcher so the browser can load application assets correctly.
 
-At η = 0.5, this quadratic reaches its minimum in one update. At η = 1, a non-optimal starting point keeps oscillating at the same objective value. These thresholds are specific to this objective; they are not universal rules for gradient descent.
+## Explore the space
 
-## Optional personalized AI explanations
+| Action | Result |
+| --- | --- |
+| Submit a learning question | AI generates dimensions, then explanations assigned to their values. |
+| Select a point or card | Read its full explanation in the left panel. |
+| Scroll on empty canvas / use + or − | Zoom in or out around the pointer / center. |
+| Use the detail buttons | Switch between dots, titles, keywords, summaries, and full explanations. |
+| Drag empty canvas | Pan the exploration space. |
+| Double-click empty canvas | Switch between a full explanation view and a dot overview. |
+| Change the horizontal or vertical dimension | Reorganize explanations according to their categorical values. |
+| Click an axis value or use a dimension filter | Emphasize matching explanations; retain other points faintly for context. |
+| Search | Match words in explanation titles, bodies, summaries, or keywords. |
+| Bookmark | Save interesting explanations; the bookmark filter shows their locations. |
+| Generate more here | Add explanations satisfying the active dimension filters. Text search is a display filter and is not a generation constraint. |
+| Add a dimension (+ beside filters) | AI generates values for a new lens and classifies every existing explanation. It does not rewrite the explanation bodies. |
+| My notes | Write your own understanding. Optionally include these notes when generating a new space or additional explanations. |
+| Guide my exploration | Focus one accessible perspective and move through suggestions; free exploration remains available. |
+| Ask about this explanation | Ask the LLM about the selected content and, when applicable, the current simulation. A suggested next card opens only when you choose it. |
+| Import / export | Transfer spaces, notes, bookmarks, and the linked simulation as JSON. Keys are never included. |
 
-The simulator performs the calculations. The optional LLM receives a validated snapshot and explains it; it cannot change the experiment. The selected point's gradient and the gradient used to reach it are supplied separately.
+The lower-left detail controls change the amount of information, not just text size. At high detail, pan to explore nearby explanations or use **Fit all explanations** to regain an overview. Full-text card interiors scroll independently; scroll outside them to zoom.
 
-1. Start the full server once, then stop it with Ctrl+C.
-2. Edit `backend/.env` locally:
+The horizontal and vertical axes must represent different dimensions. Selecting the dimension currently used by the other axis clears that other axis. Select “No … dimension” on both axes for an ungrouped overview.
+
+Keyboard: Tab to navigate controls; Enter/Space to activate them; Escape closes dialogs; Ctrl+Enter in the learning question submits it. When the canvas itself is focused, +/− zoom and arrow keys pan.
+
+## Connected educational example
+
+When gradient descent is the requested topic, the AI can attach the registered **gradient_descent** module. Its shared example is:
+
+- Objective: `J(w) = (w − 3)²`
+- Gradient: `J'(w) = 2(w − 3)`
+- Update: `w_next = w − learning_rate × gradient`
+
+The prepared example also uses this module. Taking one iteration in a visual explanation updates every linked mathematical, code, and explanatory block. These changing blocks are computed by the application; they do not wait for a new LLM response. The original generated lesson text remains conceptual and the explicitly labeled **Linked example** block follows the current state.
+
+Try rates 0.1 (steady convergence), 0.8 (oscillating convergence), and 1.1 (divergence). At rate 1, the objective stays unchanged while the point oscillates; at 0.5, it reaches the minimum in one update. These thresholds apply to this particular quadratic. Changing the rate while revisiting an earlier step discards its old future and starts a new continuation.
+
+The simulation stops near a zero gradient, at 150 steps, or before the parameter exceeds the display range. All gradient-descent spaces currently share this one example state. Changing spaces does not reconstruct a different objective. Other topics receive AI-generated text and mathematical/code illustrations; **arbitrary executable simulations or images are not generated in this version**. Generated code is displayed as text and never executed.
+
+## AI configuration and data flow
+
+The backend uses an OpenAI-compatible **Chat Completions** API. For example, Groq's base URL is `https://api.groq.com/openai/v1`; use a model ID currently available to your account. A provider/model must support the requested token budget and reliable JSON output. If the provider explicitly rejects `response_format`, the adapter retries without that option and still validates the result.
+
+Settings entered through the interface remain in the local server's memory. Closing a browser tab does not clear that server process; stopping the server clears in-memory overrides. For configuration across restarts, edit `backend/.env`:
 
 ```dotenv
 LLM_BASE_URL=https://api.groq.com/openai/v1
 LLM_API_KEY=your-own-key
-LLM_MODEL=a-chat-model-supported-by-your-provider
+LLM_MODEL=your-actual-chat-model-id
 ```
 
-3. Select an actual model available to your account. The model value above is a placeholder, not a valid model name. See the provider's current [API documentation](https://console.groq.com/docs/openai).
-4. Restart using `START_CONCEPTATLAS.bat` or `python launch.py`.
-5. Open **Ask the guide**. When the server has a key and model configured, the interface indicates that the AI connection is configured. The first question verifies whether those credentials and that model work.
+The model ID above is a placeholder. No API key or model is bundled. The launcher creates `.env` from `.env.example` when needed. Never share `.env` or commit it. The server binds to `127.0.0.1` for local use.
 
-The adapter uses the OpenAI-compatible `/chat/completions` format, so another compatible provider can be configured through its base URL. Compatibility depends on the provider and model. The key remains server-side. A question and its selected simulation state are sent to the chosen provider when you ask for an AI explanation. Provider usage may incur charges. Never commit or share `backend/.env`.
+The provider receives the question, selected notes when enabled, dimensions and existing explanation context when needed, and the validated simulation snapshot for a contextual tutor question. Provider charges and limits depend on your account. Saving settings alone does not invoke generation.
 
-If the API is unavailable, computed explanations remain available. AI output should be checked against the displayed calculations. **No live provider call was tested for this delivery because no credentials were supplied**; API behavior was tested with mocked provider responses.
+A new space normally uses two requests: dimensions, then cards. Adding a dimension, generating more cards, or asking the tutor uses a further request. Cancellation stops the browser from using the result; a provider request already sent may still complete or count toward usage.
 
-## Research concept and boundaries
+Server validation checks JSON structure, unique dimension values, allowed dimension assignments, filter compliance, and complete reclassification of cards. This does not prove the educational claims are correct. Check generated explanations against course materials.
 
-ConceptAtlas is inspired by [Luminate (CHI 2024)](https://luminate-research.github.io/) and its structured exploration of possibilities ([paper DOI](https://doi.org/10.1145/3613904.3642400)). The proposed extension explores linked educational representations and learner-controlled guidance. It is not a reproduction of Luminate.
+## Storage and limits
 
-**Research question:** Does changing one representation while all others update help learners explain the same concept across graphical, mathematical, and computational forms?
+Spaces, notes, and bookmarks are saved in this browser's local storage when available. The app retains up to 16 spaces, discarding the oldest when a seventeenth is added; export before that point if needed. A space supports up to 8 dimensions and 80 cards. If browser storage is full, export the session. Imported JSON is validated before use. This explorer's export format differs from the earlier fixed-simulator V1.
 
-This V1 is a demonstrator, not evidence of improved learning. It contains one verified quadratic module, not arbitrary topic generation. Guided mode uses a direction prediction prompt and optional explanations; it does not automatically diagnose overload. The displayed Python is illustrative, while numerical simulation runs in TypeScript. Graph arrows join discrete states; they do not represent a physical trajectory along the curve. There are no accounts, remote session storage, or research analytics.
+There are no accounts, cloud storage, background analytics, or inferred student profiles. Guided navigation does not automatically diagnose overload or claim that a learner has mastered a topic.
 
-To keep the display usable, an experiment stops near a zero gradient, at 150 updates, or before an update would exceed the parameter display range. Starting values are limited to −6 through 12 and rates to 0.01 through 1.5. Displayed values are rounded, while stored calculations retain full JavaScript numerical precision.
+## Development and checks
 
-## Development
-
-Use a current Node.js LTS release compatible with Vite 6 and Python 3.11+. The included lockfiles record the delivered dependencies.
+React + TypeScript + Vite render the app, native SVG renders the controlled simulation, and KaTeX renders formulas. FastAPI/Pydantic validate generation requests and outputs; httpx calls the configured provider. UI assets and fonts are bundled locally.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-The Vite dev server proxies `/api` to `127.0.0.1:8000`. For AI during development, run the Python server in a second terminal:
+For AI during frontend development, run the Python backend in another terminal (after creating and activating `.venv`):
 
 ```bash
-python -m venv .venv
-# Activate .venv using the command for your operating system, then:
 python -m pip install -r backend/requirements.lock.txt
 python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
-Rebuild the shipped interface after editing:
-
-```bash
-npm run build
-```
-
-### Architecture
-
-| File | Responsibility |
-| --- | --- |
-| `src/engine.ts` | Deterministic updates, history, branching, numeric snapshots, session validation |
-| `src/LabContext.tsx` | Shared React state and browser persistence |
-| `src/Graph.tsx` | Plotly graph, slope display, point selection |
-| `src/App.tsx` | Connected math/code/table views, controls, guided prediction |
-| `src/Guide.tsx` | Computed explanations, built-in guide, optional AI requests |
-| `backend/app.py` | FastAPI host, Pydantic math validation, optional provider adapter |
-| `launch.py` | Local startup and dependency setup; standard-library demo mode |
-
-React + TypeScript + Vite power the interface; Plotly renders the graph; KaTeX renders mathematics; Lucide supplies icons. The UI bundles its assets and does not need external fonts or a CDN.
-
-### Validation
+Vite proxies `/api` to that local server. For the normal prebuilt app, `python launch.py` handles this automatically.
 
 ```bash
 npm test
 npm run build
-# After activating the Python environment:
 python -m unittest discover -s backend/tests -v
 ```
 
-The test suite covers numeric trajectories, the distinction between oscillation and divergence, history replay and branching, imported calculation validation, display limits, API snapshot validation, error responses, and static hosting. The Windows launchers are provided but were not executed on Windows during development.
+The delivered version passed 23 TypeScript tests and 22 Python tests, including the original simulation checks and new generation, schema, filtering, layout, zoom, and API contract checks. Browser checks covered the prepared-space interactions and the unconfigured generation path. **Live generation was not tested with a real provider because no credentials were supplied.** Provider calls were mocked in automated tests. The Windows launchers are supplied but were not run on Windows in this environment.
 
-See `DEMO_SCRIPT.md` for an English walkthrough suitable for a short researcher-role presentation.
+| Source file | Purpose |
+| --- | --- |
+| `src/App.tsx` | Question-to-space flow, API settings, reader, notes, guided navigation |
+| `src/AtlasCanvas.tsx` | Categorical canvas, semantic zoom, filters, axes, bookmarks |
+| `src/atlas.ts` | Space types, import validation, layout, camera math |
+| `src/prepared.ts` | Explicitly labeled authored example |
+| `src/Content.tsx` | Safe content rendering and synchronized live blocks |
+| `src/engine.ts` | Verified gradient-descent state and history |
+| `backend/learning_api.py` | Dimension/card generation, additional dimension, tutor and settings |
+| `backend/app.py` | Local static host, numeric snapshot validation, explanation adapter |
+
+## Luminate connection and research framing
+
+Reference repository: https://github.com/project-luminate/luminate/
+
+Reference inspected at commit: `5ad81fb3d08db7ef440a57a37ca30e4dcfa9cf18`.
+
+This is an educational adaptation of Luminate's interface organization and interaction ideas, with a newly implemented frontend and local backend. It is not the official Luminate system or a complete reproduction of every feature. It does not include Editor.js rich-text block editing, automatic lesson verification, force-directed clustering, or arbitrary simulation generation. The educational additions are linked concept representations and learner-controlled guidance.
+
+See `ACKNOWLEDGEMENTS.md` for attribution and `DEMO_SCRIPT.md` for a short English researcher-role demonstration.
